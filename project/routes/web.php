@@ -4,9 +4,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\InventoryController;
 
 Route::resource('categories', CategoryController::class);
 Route::resource('books', BookController::class);
+Route::resource('inventory', InventoryController::class);
 
 
 Route::get('/', function () {

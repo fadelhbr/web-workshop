@@ -7,10 +7,33 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OfficerController;
 
-Route::resource('categories', CategoryController::class);
-Route::resource('books', BookController::class);
-Route::resource('inventory', InventoryController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+    
+    Route::get('/admin/books', function () {
+        return view('admin.books');
+    })->name('admin.books');
+    
+    Route::get('/admin/officers', function () {
+        return view('admin.officers');
+    })->name('admin.officers');
+    
+    Route::get('/admin/users', function () {
+        return view('admin.users');
+    })->name('admin.users');
+    
+    Route::get('/admin/inventory', function () {
+        return view('admin.inventory');
+    })->name('admin.inventory');
 
+
+    Route::resource('/admin/officers', OfficerController::class);
+    Route::resource('/admin/categories', CategoryController::class);
+    Route::resource('/admin/books', BookController::class);
+    Route::resource('/admin/inventory', InventoryController::class);
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,7 +50,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::resource('officers', OfficerController::class);
 
 
 require __DIR__.'/auth.php';
